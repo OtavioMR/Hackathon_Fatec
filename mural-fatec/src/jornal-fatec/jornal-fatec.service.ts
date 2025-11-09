@@ -13,30 +13,31 @@ export class JornalFatecService {
 
         @InjectRepository(Aluno)
         private readonly alunoRepository: Repository<Aluno>,
-    ) { }
+    ) {}
 
-    async create(dto: CreateJornalDto) {
-        // 1️⃣ Buscar o aluno que vai ser dono da postagem
-        const aluno = await this.alunoRepository.findOne({ where: { id: dto.alunoId } });
+    // Método para criar uma nova postagem no jornal
+    async create(dto: CreateJornalDto, idAluno: number, filePath: string | null, fotoPath: string | null) {
+        // Buscar o aluno que vai ser dono da postagem
+        const aluno = await this.alunoRepository.findOne({ where: { id: idAluno } });
         if (!aluno) {
             throw new NotFoundException('Aluno não encontrado');
         }
 
-        // 2️⃣ Criar a postagem (objeto simples, não array)
+        // Criar a postagem com os caminhos dos arquivos
         const postagem = this.jornalRepository.create({
+            titulo: dto.titulo,
             mensagem: dto.mensagem,
-            arquivo: dto.arquivo ?? "",
-            foto: dto.foto ?? "",
+            arquivo: filePath || null, // Caminho do arquivo
+            foto: fotoPath || null, // Caminho da foto
             aluno: aluno,
         });
 
-        // 3️⃣ Salvar no banco
+        // Salvar a postagem no banco de dados
         return await this.jornalRepository.save(postagem);
     }
 
-    // jornal-fatec.service.ts
+    // Método para listar todas as postagens
     async findAll(): Promise<JornalFatec[]> {
         return await this.jornalRepository.find();
     }
-
 }

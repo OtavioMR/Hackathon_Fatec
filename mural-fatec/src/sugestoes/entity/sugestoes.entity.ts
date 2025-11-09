@@ -9,8 +9,8 @@ export class Sugestoes{
     @Column()
     mensagem: string;
 
-    @Column({nullable: true})
-    arquivo: string;
+    @Column({type: 'text', nullable: true})
+    arquivo?: string | null;
 
     @ManyToOne(() => Aluno, (aluno) => aluno.sugestoes, {eager: true})
     @JoinColumn({ name: 'aluno_id'})

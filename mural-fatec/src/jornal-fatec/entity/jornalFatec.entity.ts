@@ -7,13 +7,18 @@ export class JornalFatec {
     id: number;
 
     @Column({nullable: true})
+    titulo: string;
+
+    @Column({nullable: true})
     mensagem: string;
 
-    @Column({ nullable: true })
-    arquivo: string; // aqui vai o caminho/nome do arquivo anexado
+    // Altere o tipo para string (ou text, caso precise de mais espaço)
+    @Column({type: 'text', nullable: true })
+    arquivo?: string | null; // Aqui vai o caminho/nome do arquivo anexado
 
-    @Column({ nullable: true })
-    foto: string; // aqui vai o caminho/nome da foto
+    // Altere o tipo para string (ou text, caso precise de mais espaço)
+    @Column({type: 'text', nullable: true })
+    foto?: string | null; // Aqui vai o caminho/nome da foto
 
     @ManyToOne(() => Aluno, (aluno) => aluno.jornais, { eager: true })
     @JoinColumn({ name: 'aluno_id' })

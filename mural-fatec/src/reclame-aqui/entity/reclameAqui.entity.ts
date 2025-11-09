@@ -1,21 +1,23 @@
-import { Aluno } from "src/aluno/entity/aluno.entity";
-import { Column, Entity, ManyToOne, JoinColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ManyToOne } from 'typeorm';
+import { Aluno } from 'src/aluno/entity/aluno.entity';
 
-@Entity('reclame_aqui')
+@Entity()
 export class ReclameAqui {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column({ nullable: true })
-    arquivo: string; // caminho/nome do arquivo/foto
+  @Column()
+  mensagem: string;
 
-    @Column()
-    mensagem: string;
+  @Column({ nullable: true })
+  arquivo?: string;
 
-    @Column({ default: false })
-    anonimato: boolean;
+  @Column({ default: false })
+  anonimato: boolean;
 
-    @ManyToOne(() => Aluno, (aluno) => aluno.reclameAqui, { eager: true })
-    @JoinColumn({ name: 'aluno_id' })
-    aluno: Aluno;
+  @ManyToOne(() => Aluno, aluno => aluno.reclameAqui)
+  aluno: Aluno;
+
+  @CreateDateColumn()
+  criadoEm: Date; // <-- adiciona aqui
 }
