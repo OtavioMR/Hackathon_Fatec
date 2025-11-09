@@ -25,7 +25,6 @@ export class ReclameAquiController {
             // Converter o campo "anonimato" de string para boolean
             const dto: CreateReclameAquiDto = {
                 mensagem: body.mensagem,
-                anonimato: body.anonimato === 'true',
                 arquivo: arquivo?.filename,
             };
 

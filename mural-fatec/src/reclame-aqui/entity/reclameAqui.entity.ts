@@ -12,9 +12,6 @@ export class ReclameAqui {
   @Column({ nullable: true })
   arquivo?: string;
 
-  @Column({ default: false })
-  anonimato: boolean;
-
   @ManyToOne(() => Aluno, aluno => aluno.reclameAqui)
   aluno: Aluno;
 

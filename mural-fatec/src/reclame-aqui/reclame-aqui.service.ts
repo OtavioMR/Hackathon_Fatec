@@ -28,7 +28,6 @@ export class ReclameAquiService {
             const reclamacao = this.reclameAquiRepository.create({
                 mensagem: dto.mensagem,
                 arquivo: dto.arquivo ?? "",
-                anonimato: dto.anonimato,
                 aluno: aluno,
             });
 

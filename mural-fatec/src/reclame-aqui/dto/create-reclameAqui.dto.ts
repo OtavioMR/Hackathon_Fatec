@@ -7,7 +7,4 @@ export class CreateReclameAquiDto {
   @IsOptional()
   @IsString()
   arquivo?: string| null;  // Arquivo (opcional)
-
-  @IsBoolean()
-  anonimato: boolean;  // Define se a reclamação é anônima
 }
